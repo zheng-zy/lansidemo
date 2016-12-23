@@ -1,6 +1,6 @@
 package com.demo;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.io.File;
 
 /**
  * <p></p>
@@ -8,8 +8,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class AppTest {
     public static void main(String[] args) {
-        String str = "tbl_sys_role_resource";
-        checkNotNull(str);
+        System.out.println("System.getProperty(\"user.dir\") = " + System.getProperty("user.dir"));
+        System.out.println("System.getProperty(\"java.io.tmpdir\") = " + System.getProperty("java.io.tmpdir") + File.separatorChar + "1.png");
+        System.out.println("System.getProperty(\"java.io.tmpdir\") = " + System.getProperty("java.io.tmpdir") + File.separator + "1.png");
     }
 }
 
