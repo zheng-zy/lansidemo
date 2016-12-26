@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" type="text/css" href="themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="themes/icon.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/common/easyui-lang-zh_CN.js"></script>
+
+    <!--<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/demo/demo.css">-->
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>-->
+    <!--<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>-->
+    <script type="text/javascript">
+        $(function () {
+        });
+
+        function addTab(title, url) {
+            if ($('#index-tabs').tabs('exists', title)) {
+                $('#index-tabs').tabs('select', title);
+            } else {
+                var content = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
+                $('#index-tabs').tabs('add', {
+                    title: title,
+                    content: content,
+                    closable: true
+                });
+            }
+        }
+    </script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'north'" style="height:50px"></div>
+<div data-options="region:'south',split:true" style="height:50px;"></div>
+<div data-options="region:'west',split:true" title="导航菜单" style="width:150px;">
+    <div class="easyui-accordion" data-options="fit:true,border:false">
+        <ul class="easyui-tree">
+            <li>
+                <span>系统配置</span>
+                <ul>
+                    <li><span><a href="#">字典管理</a></span></li>
+                    <li><span><a href="#" onclick="addTab('权限管理','page/permission.html')">权限管理</a></span></li>
+                    <li><span>File 13</span></li>
+                </ul>
+            </li>
+            <li><span>File 2</span></li>
+            <li><span>File 3</span></li>
+            <li><span>File21</span></li>
+        </ul>
+        <!--</div>-->
+    </div>
+</div>
+<div data-options="region:'center',title:'主面板区域',iconCls:'icon-ok'">
+    <div id="index-tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+        <div title="关于" data-options="href:'layout/_content.html'" style="padding:10px"></div>
+        <div title="数据表格" style="padding:5px">
+            <table class="easyui-datagrid"
+                   data-options="url:'layout/datagrid_data.json',singleSelect:true,fit:true,fitColumns:true">
+                <thead>
+                <tr>
+                    <th data-options="field:'itemid'" width="80">编号</th>
+                    <th data-options="field:'productid'" width="100">商品编号</th>
+                    <th data-options="field:'listprice',align:'right'" width="80">市场价</th>
+                    <th data-options="field:'unitcost',align:'right'" width="80">成本价</th>
+                    <th data-options="field:'attr1'" width="150">描述</th>
+                    <th data-options="field:'status',align:'center'" width="50">状态</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
