@@ -3,6 +3,7 @@ package com.demo.common.config;
 import com.demo.blog.BlogController;
 import com.demo.common.model._MappingKit;
 import com.demo.index.IndexController;
+import com.demo.user.UserController;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.PropKit;
@@ -33,6 +34,12 @@ public class DemoConfig extends JFinalConfig {
         // 加载少量必要配置，随后可用PropKit.get(...)获取值
         PropKit.use("a_little_config.txt");
         me.setDevMode(PropKit.getBoolean("devMode", false));
+        // 使用fastjson
+//        me.setJsonFactory(new IJsonFactory() {
+//            public CustomJson getJson() {
+//                return new CustomJson();
+//            }
+//        });
     }
 
     /**
@@ -41,6 +48,7 @@ public class DemoConfig extends JFinalConfig {
     public void configRoute(Routes me) {
         me.add("/", IndexController.class, "/index");    // 第三个参数为该Controller的视图存放路径
         me.add("/blog", BlogController.class);            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+        me.add("/user", UserController.class);            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
     }
 
     /**

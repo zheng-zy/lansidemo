@@ -1,4 +1,5 @@
-jdbcUrl = jdbc:mysql://127.0.0.1/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+# jdbcUrl = jdbc:mysql://127.0.0.1/jfinal_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+jdbcUrl = jdbc:mysql://127.0.0.1/lansi_demo?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
 user = root
 password = 666666
 devMode = true
