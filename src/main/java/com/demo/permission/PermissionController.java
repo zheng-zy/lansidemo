@@ -4,7 +4,6 @@ import com.demo.common.Result;
 import com.demo.common.model.Permission;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
-import com.jfinal.plugin.activerecord.Page;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -17,22 +16,22 @@ import java.util.Map;
  */
 public class PermissionController extends Controller {
     public void list() {
-        int page = getParaToInt("page", 1);
-        int rows = getParaToInt("rows", 10);
-        Page<Permission> permissionPage = Permission.dao.paginate(page, rows);
         Map<String, Object> map = new HashMap<String, Object>();
-        List<Permission> permissions = permissionPage.getList();
+        List<Permission> permissions = Permission.dao.findAll();
         for (Permission permission : permissions) {
             permission.put("_parentId", permission.getParentId());
         }
-        map.put("rows", permissionPage.getList());
-        map.put("total", permissionPage.getTotalRow());
+        map.put("rows", permissions);
+        map.put("total", permissions.size());
         renderJson(map);
     }
 
     @Before(PermissionValidator.class)
     public void save() {
-        getModel(Permission.class, null).save();
+        Permission permission = getModel(Permission.class, null);
+        Permission parent = Permission.dao.findById(permission.getParentId());
+        permission.setParentIds(parent.getParentIds() + parent.getId() + "/");
+        permission.save();
         renderJson(Result.SUCCESS);
     }
 
