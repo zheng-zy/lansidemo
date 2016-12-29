@@ -3,6 +3,8 @@ package com.demo.common.config;
 import com.demo.blog.BlogController;
 import com.demo.common.model._MappingKit;
 import com.demo.index.IndexController;
+import com.demo.permission.PermissionController;
+import com.demo.role.RoleController;
 import com.demo.user.UserController;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
@@ -49,6 +51,8 @@ public class DemoConfig extends JFinalConfig {
         me.add("/", IndexController.class, "/");    // 第三个参数为该Controller的视图存放路径
         me.add("/blog", BlogController.class);            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
         me.add("/user", UserController.class);            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+        me.add("/role", RoleController.class);            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
+        me.add("/permission", PermissionController.class, "/admin");            // 第三个参数省略时默认与第一个参数值相同，在此即为 "/blog"
     }
 
     /**

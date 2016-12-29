@@ -15,9 +15,11 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
  */
 public class _MappingKit {
 
-    public static void mapping(ActiveRecordPlugin arp) {
-        arp.addMapping("blog", "id", Blog.class);
-        arp.addMapping("tbl_user", "id", User.class);
-    }
+	public static void mapping(ActiveRecordPlugin arp) {
+		arp.addMapping("blog", "id", Blog.class);
+		arp.addMapping("tbl_permission", "id", Permission.class);
+		arp.addMapping("tbl_role", "id", Role.class);
+		arp.addMapping("tbl_user", "id", User.class);
+	}
 }
 

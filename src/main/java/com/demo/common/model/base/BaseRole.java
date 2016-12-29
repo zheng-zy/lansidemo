@@ -9,52 +9,52 @@ import com.jfinal.plugin.activerecord.Model;
 @SuppressWarnings("serial")
 public abstract class BaseRole<M extends BaseRole<M>> extends Model<M> implements IBean {
 
-    public java.lang.Integer getRoleId() {
-        return get("role_id");
+    public java.lang.Integer getId() {
+        return get("id");
     }
 
-    public void setRoleId(java.lang.Integer roleId) {
-        set("role_id", roleId);
+    public void setId(java.lang.Integer id) {
+        set("id", id);
     }
 
-    public java.lang.String getClientSysId() {
-        return get("client_sys_id");
+    public java.lang.String getName() {
+        return get("name");
     }
 
-    public void setClientSysId(java.lang.String clientSysId) {
-        set("client_sys_id", clientSysId);
+    public void setName(java.lang.String name) {
+        set("name", name);
     }
 
-    public java.lang.String getRoleName() {
-        return get("role_name");
+    public java.lang.Integer getStatus() {
+        return get("status");
     }
 
-    public void setRoleName(java.lang.String roleName) {
-        set("role_name", roleName);
+    public void setStatus(java.lang.Integer status) {
+        set("status", status);
     }
 
-    public java.lang.String getDescription() {
-        return get("description");
+    public java.util.Date getCreateTime() {
+        return get("create_time");
     }
 
-    public void setDescription(java.lang.String description) {
-        set("description", description);
+    public void setCreateTime(java.util.Date createTime) {
+        set("create_time", createTime);
     }
 
-    public java.lang.String getAvailable() {
-        return get("available");
+    public java.util.Date getUpdateTime() {
+        return get("update_time");
     }
 
-    public void setAvailable(java.lang.String available) {
-        set("available", available);
+    public void setUpdateTime(java.util.Date updateTime) {
+        set("update_time", updateTime);
     }
 
-    public java.lang.String getRegId() {
-        return get("reg_id");
+    public java.lang.String getDesc() {
+        return get("desc");
     }
 
-    public void setRegId(java.lang.String regId) {
-        set("reg_id", regId);
+    public void setDesc(java.lang.String desc) {
+        set("desc", desc);
     }
 
 }
