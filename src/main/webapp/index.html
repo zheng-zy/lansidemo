@@ -31,14 +31,13 @@
 <div data-options="region:'south',split:true" style="height:50px;"></div>
 <div data-options="region:'west',split:true" title="导航菜单" style="width:150px;">
     <div class="easyui-accordion" data-options="fit:true,border:false">
-        <ul class="easyui-tree">
+        <ul class="easyui-tree" data-options="lines:true">
             <li>
                 <span>系统配置</span>
                 <ul>
                     <li><span><a href="#" onclick="addTab('用户管理','user/index.html')">用户管理</a></span></li>
                     <li><span><a href="#" onclick="addTab('角色管理','role/index.html')">角色管理</a></span></li>
                     <li><span><a href="#" onclick="addTab('权限管理','admin/permission.html')">权限管理</a></span></li>
-                    <li><span>File 13</span></li>
                 </ul>
             </li>
             <li><span>File 2</span></li>
@@ -50,8 +49,10 @@
 </div>
 <div data-options="region:'center',title:'主面板区域',iconCls:'icon-ok'">
     <div id="index-tabs" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-        <div title="关于" data-options="href:'portal/test.html'" style="padding:10px"></div>
-        <div title="关于" data-options="href:'portal/portal.html'" style="padding:10px"></div>
+        <div title="首页" data-options="border:false" style="overflow: hidden;">
+            <iframe src="/portal/portal.html" frameborder="0" style="border: 0; width: 100%; height: 100%;"></iframe>
+        </div>
+
     </div>
 </div>
 </body>

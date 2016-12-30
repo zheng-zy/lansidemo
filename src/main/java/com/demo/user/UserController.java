@@ -22,8 +22,8 @@ public class UserController extends Controller {
     }
 
     public void list() {
-        int page = getParaToInt("page");
-        int rows = getParaToInt("rows");
+        int page = getParaToInt("page", 1);
+        int rows = getParaToInt("rows", 10);
         Page<User> userPage = User.dao.paginate(page, rows);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("rows", userPage.getList());

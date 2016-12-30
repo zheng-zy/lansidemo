@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript">
+        var show_dlg;
+        $(function () {
+            $('#dg').datagrid({
+                fitColumns: true,
+                striped: true,
+                rownumbers: true,
+                pagination: true,
+                singleSelect: true,
+                url: '/user/list',
+                columns: [[
+                    {field: 'id', title: 'Id'},
+                    {field: 'name', title: 'Name'},
+                    {field: 'desc', title: 'Desc', align: 'right'},
+                    {field: 'action', title: 'Action', formatter: operation}
+                ]]
+            });
+            show_dlg = $('#dlg').show().dialog({
+                title: 'My Dialog',
+                width: 400,
+                height: 200,
+                closed: false,
+                cache: false,
+                modal: true,
+//                onClose:function(){
+//                    alert('close');
+//                },
+//                onOpen: function() {
+//                    alert('open');
+//                }
+            }).dialog('close')
+
+        });
+
+        function operation(value, row, index) {
+            var str = '';
+            str += '<a href="javascript:void(0)" onclick="grantFun(\'{0}\');" >授权</a>', row.id;
+            str += '|';
+            str += '<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id;
+            str += '|';
+            str += '<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id;
+            return str;
+            //            return "<a href='" + row.id + "' target='_blank'>Cell Link Name</a>";
+        }
+
+        function grantFun(id) {
+            show_dlg.dialog('open');
+            $('#tt').tree({
+                checkbox: true,
+                url: '/permission/tree'
+            });
+//            $('#tb').datagrid({
+//                fitColumns: true,
+//                striped: true,
+//                rownumbers: true,
+//                pagination: true,
+//                singleSelect: true,
+//                url: '/user/list',
+//                columns: [[
+//                    {field: 'id', title: 'Id'},
+//                    {field: 'name', title: 'Name'},
+//                    {field: 'desc', title: 'Desc', align: 'right'},
+//                    {field: 'action', title: 'Action', formatter: operation}
+//                ]]
+//            });
+
+        }
+
+    </script>
+</head>
+<body>
+<table id="dg"></table>
+<div id="dlg" style="display: none;overflow: hidden;">
+    <ul id="tt"></ul>
+</div>
+</body>
+</html>

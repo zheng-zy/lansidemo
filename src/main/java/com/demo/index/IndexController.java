@@ -13,6 +13,10 @@ public class IndexController extends Controller {
     public void portal() {
         render("/portal/portal.html");
     }
+
+    public void test() {
+        render("/user/user.html");
+    }
 }
 
 

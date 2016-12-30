@@ -1,0 +1,18 @@
+{
+  "1": {
+    "checked": false,
+    "children": [
+      {
+        "checked": false,
+        "id": "2",
+        "pid": "1",
+        "state": "open",
+        "text": "角色管理"
+      }
+    ],
+    "id": "1",
+    "pid": "0",
+    "state": "open",
+    "text": "统一权限管理系统"
+  }
+}

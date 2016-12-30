@@ -88,6 +88,12 @@
                 });
             }
         }
+        function allotRole() {
+
+        }
+        function operation(value, row, index) {
+            return "<a href='" + row.id + "' target='_blank'>Cell Link Name</a>";
+        }
     </script>
 </head>
 <body>
@@ -111,6 +117,7 @@
         <th field="create_time" width="50">Create Time</th>
         <th field="update_time" width="50">Update Time</th>
         <th field="desc" width="50">Desc</th>
+        <th data-options="field: 'action', width: 50, formatter: operation">操作</th>
     </tr>
     </thead>
 </table>
