@@ -1,9 +1,9 @@
 package com.demo.permission;
 
-import com.alibaba.fastjson.JSON;
 import com.demo.common.Result;
 import com.demo.common.model.Permission;
 import com.demo.common.page.Tree;
+import com.demo.common.util.TreeUtils;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 
@@ -65,26 +65,33 @@ public class PermissionController extends Controller {
 
     public void tree() {
         List<Permission> permissions = Permission.dao.findAll();
-        Map<String, Tree> treeMap = new HashMap<String, Tree>();
-//        List<Tree> trees = new ArrayList<Tree>(permissions.size());
-        for (int i = 0; i < permissions.size(); i++) {
-            if (i == 0) {
-                treeMap.put(permissions.get(i).getId().toString(), new Tree(permissions.get(i)));
-            } else {
-                String pid = permissions.get(i).getParentId().toString();
-                if (treeMap.get(pid) != null) {
-                    List<Tree> trees1 = treeMap.get(pid).getChildren();
-                    if (null == trees1) {
-                        trees1 = new ArrayList<Tree>();
-                        trees1.add(new Tree(permissions.get(i)));
-                        treeMap.get(pid).setChildren(trees1);
-                    } else {
-                        trees1.add(new Tree(permissions.get(i)));
-                    }
-                }
-            }
+        List<Tree> trees = new ArrayList<Tree>();
+        for (Permission permission : permissions) {
+            trees.add(new Tree(permission));
         }
-        System.out.println(JSON.toJSONString(treeMap));
-        renderJson(new ArrayList<Tree>().add(treeMap.get("0")));
+        List<Tree> newTrees = TreeUtils.getFatherNode(trees);
+        renderJson(newTrees);
+//        Map<String, Tree> treeMap = new HashMap<String, Tree>();
+////        List<Tree> trees = new ArrayList<Tree>(permissions.size());
+//        for (int i = 0; i < permissions.size(); i++) {
+//            if (i == 0) {
+//                treeMap.put(permissions.get(i).getId().toString(), new Tree(permissions.get(i)));
+//            } else {
+//                treeMap.put(permissions.get(i).getId().toString(), new Tree(permissions.get(i)));
+//                String pid = permissions.get(i).getParentId().toString();
+//                if (treeMap.get(pid) != null) {
+//                    List<Tree> trees1 = treeMap.get(pid).getChildren();
+//                    if (null == trees1) {
+//                        trees1 = new ArrayList<Tree>();
+//                        trees1.add(new Tree(permissions.get(i)));
+//                        treeMap.get(pid).setChildren(trees1);
+//                    } else {
+//                        trees1.add(new Tree(permissions.get(i)));
+//                    }
+//                }
+//            }
+//        }
+//        System.out.println("JSON.toJSONString(treeMap) = " + JSON.toJSONString(treeMap));
+//        renderJson(new ArrayList<Tree>().add(treeMap.get("0")));
     }
 }

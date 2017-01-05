@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class Tree implements java.io.Serializable {
     private String state = "open";// open,closed
     private boolean checked = false;
     private Object attributes;
-    private List<Tree> children;
+    private List<Tree> children = new ArrayList<Tree>();
     private String iconCls;
     private String pid;
 
@@ -29,6 +30,12 @@ public class Tree implements java.io.Serializable {
         this.id = permission.getId().toString();
         this.text = permission.getName();
         this.pid = permission.getParentId().toString();
+    }
+
+    public Tree(String id, String text, String pid) {
+        this.id = id;
+        this.text = text;
+        this.pid = pid;
     }
 
 }
