@@ -42,10 +42,11 @@
         });
 
         function operation(value, row, index) {
+            var id = row.id;
             var str = '';
-            str += '<a href="javascript:void(0)" onclick="grantFun(\'{0}\');" >授权</a>', row.id;
+            str += '<a href="javascript:void(0)" onclick="grantFun(' + id + ');" >授权</a>';
             str += '|';
-            str += '<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id;
+            str += '<a href="javascript:void(0)" onclick="editFun(' + id + ');" >编辑</a>';
             str += '|';
             str += '<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id;
             return str;
@@ -54,33 +55,57 @@
 
         function grantFun(id) {
             show_dlg.dialog('open');
+            $('#id').val(id);
             $('#tt').tree({
                 checkbox: true,
                 url: '/permission/tree'
             });
-//            $('#tb').datagrid({
-//                fitColumns: true,
-//                striped: true,
-//                rownumbers: true,
-//                pagination: true,
-//                singleSelect: true,
-//                url: '/user/list',
-//                columns: [[
-//                    {field: 'id', title: 'Id'},
-//                    {field: 'name', title: 'Name'},
-//                    {field: 'desc', title: 'Desc', align: 'right'},
-//                    {field: 'action', title: 'Action', formatter: operation}
-//                ]]
-//            });
-
+        }
+        function grant() {
+            var nodes = $('#tt').tree('getChecked');
+            var ids = '';
+            for (var i = 0; i < nodes.length; i++) {
+                ids += nodes[i].id + ',';
+            }
+//            $('#ids').val(ids);
+            $('#ff').form('submit', {
+                url: '/permission/grant',
+                onSubmit: function (param) {
+//                    param.id = $('#id').val();
+                    param.ids = ids;
+                },
+                success: function (result) {
+                    var result = eval('(' + result + ')');
+                    if (result.success) {
+                        show_dlg.dialog('close');
+                        $.messager.show({	// show error message
+                            title: 'Success',
+                            msg: '授权成功'
+                        });
+                    } else {
+                        $.messager.show({	// show error message
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                }
+            });
         }
 
     </script>
 </head>
 <body>
 <table id="dg"></table>
-<div id="dlg" style="display: none;overflow: hidden;">
+<div id="dlg" style="display: none;overflow: hidden;" buttons="#dlg-buttons">
+    <form id="ff" method="post">
+        <input id="id" name="id" class="easyui-validatebox" type="hidden">
+    </form>
     <ul id="tt"></ul>
+</div>
+<div id="dlg-buttons">
+    <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="grant()">Save</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel"
+       onclick="javascript:show_dlg.dialog('close')">Cancel</a>
 </div>
 </body>
 </html>
