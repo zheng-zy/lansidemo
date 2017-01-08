@@ -1,9 +1,8 @@
 /*
-SQLyog Ultimate v11.24 (32 bit)
-MySQL - 5.7.13-log : Database - lansi_demo
+SQLyog Ultimate v10.00 Beta1
+MySQL - 5.7.14-log : Database - lansi_demo
 *********************************************************************
 */
-
 
 /*!40101 SET NAMES utf8 */;
 
@@ -33,15 +32,27 @@ CREATE TABLE `blog` (
 
 /*Data for the table `blog` */
 
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (3, 'test 2', 'test 2');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (4, 'test 3', 'test 3');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (5, 'test 4', 'test 4');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (6, '123', '123');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (7, 'sda ', 'asd');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (8, '123', '123');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (9, '123', '123');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (10, '123', '123');
-INSERT INTO `blog` (`id`, `title`, `content`) VALUES (11, '123', '123');
+INSERT INTO `blog` (`id`, `title`, `content`)
+VALUES (3, 'test 2', 'test 2'), (4, 'test 3', 'test 3'), (5, 'test 4', 'test 4'), (6, '123', '123'), (7, 'sda ', 'asd'),
+  (8, '123', '123'), (9, '123', '123'), (10, '123', '123'), (11, '123', '123');
+
+/*Table structure for table `tbl_blog` */
+
+DROP TABLE IF EXISTS `tbl_blog`;
+
+CREATE TABLE `tbl_blog` (
+  `id`          INT(11)     NOT NULL AUTO_INCREMENT,
+  `title`       VARCHAR(50) NOT NULL,
+  `content`     MEDIUMTEXT,
+  `create_time` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP   NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `desc`        VARCHAR(100)         DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+/*Data for the table `tbl_blog` */
 
 /*Table structure for table `tbl_permission` */
 
@@ -73,15 +84,12 @@ CREATE TABLE `tbl_permission` (
 /*Data for the table `tbl_permission` */
 
 INSERT INTO `tbl_permission` (`id`, `name`, `type`, `url`, `icon_cls`, `parent_id`, `parent_ids`, `permission`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (1, '统一权限管理系统', 1, '', NULL, 0, '0/', '', 1, '2016-12-28 15:48:17', '0000-00-00 00:00:00', NULL);
-INSERT INTO `tbl_permission` (`id`, `name`, `type`, `url`, `icon_cls`, `parent_id`, `parent_ids`, `permission`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (2, '角色管理', 2, '/role/view', '', 1, '0/1/', 'role:view', 1, '2016-12-28 15:52:42', '0000-00-00 00:00:00', '');
-INSERT INTO `tbl_permission` (`id`, `name`, `type`, `url`, `icon_cls`, `parent_id`, `parent_ids`, `permission`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (19, '添加', 3, '/role/create', NULL, 2, '0/1/2/', 'role:create', 1, '2016-12-29 16:55:47', '0000-00-00 00:00:00',
-        '角色添加');
-INSERT INTO `tbl_permission` (`id`, `name`, `type`, `url`, `icon_cls`, `parent_id`, `parent_ids`, `permission`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (20, '删除', 3, '/role/delete', NULL, 2, '0/1/2/', 'role:delete', 1, '2016-12-30 16:11:43', '0000-00-00 00:00:00',
-        '角色删除');
+VALUES (1, '统一权限管理系统', 1, '', NULL, 0, '0/', '', 1, '2016-12-28 15:48:17', '0000-00-00 00:00:00', NULL),
+  (2, '角色管理', 2, '/role/view', '', 1, '0/1/', 'role:view', 1, '2016-12-28 15:52:42', '0000-00-00 00:00:00', ''),
+  (19, '添加', 3, '/role/create', NULL, 2, '0/1/2/', 'role:create', 1, '2016-12-29 16:55:47', '0000-00-00 00:00:00',
+   '角色添加'),
+  (20, '删除', 3, '/role/delete', NULL, 2, '0/1/2/', 'role:delete', 1, '2016-12-30 16:11:43', '0000-00-00 00:00:00',
+   '角色删除');
 
 /*Table structure for table `tbl_role` */
 
@@ -122,8 +130,25 @@ CREATE TABLE `tbl_role_permission` (
 
 /*Data for the table `tbl_role_permission` */
 
-INSERT INTO `tbl_role_permission` (`id`, `role_id`, `permission_id`) VALUES (1, 1, 2);
-INSERT INTO `tbl_role_permission` (`id`, `role_id`, `permission_id`) VALUES (2, 1, 19);
+INSERT INTO `tbl_role_permission` (`id`, `role_id`, `permission_id`) VALUES (1, 1, 2), (2, 1, 19);
+
+/*Table structure for table `tbl_tag` */
+
+DROP TABLE IF EXISTS `tbl_tag`;
+
+CREATE TABLE `tbl_tag` (
+  `id`          INT(11)     NOT NULL AUTO_INCREMENT,
+  `tag`         VARCHAR(20) NOT NULL
+  COMMENT '标签',
+  `create_time` TIMESTAMP   NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` TIMESTAMP   NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `desc`        VARCHAR(100)         DEFAULT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+/*Data for the table `tbl_tag` */
 
 /*Table structure for table `tbl_user` */
 
@@ -146,37 +171,6 @@ CREATE TABLE `tbl_user` (
   DEFAULT CHARSET = utf8;
 
 /*Data for the table `tbl_user` */
-
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (5, 'xiaomi', '小米1', '666', 1, '2016-12-28 10:55:37', NULL, 'ceshi');
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (12, 'xiaowang', '小王', '666666', 1, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (13, '1', '1', '1', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (14, '2', '2', '2', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (15, '3', '3', '3', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (16, '4', '4', '4', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (17, '5', '5', '5', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (18, '7', '7', '7', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (19, '8', '8', '8', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (20, '9', '9', '9', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (21, '10', '10', '10', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (22, 'xiaowang', 'admin', '666666', 0, '2016-12-28 10:55:37', NULL, NULL);
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (23, 'xiaowang', 'admin', '666666', 1, '2016-12-29 15:14:01', NULL, '管理员');
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (24, 'xiaowang', 'admin', '666666', 1, '2016-12-29 15:26:40', NULL, '管理员');
-INSERT INTO `tbl_user` (`id`, `login_name`, `name`, `password`, `status`, `create_time`, `update_time`, `desc`)
-VALUES (25, 'xiaowang', 'admin', '666', 1, '2016-12-29 15:26:56', NULL, '管理员');
 
 /*!40101 SET SQL_MODE = @OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS */;

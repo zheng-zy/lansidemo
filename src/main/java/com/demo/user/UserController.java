@@ -1,7 +1,7 @@
 package com.demo.user;
 
 import com.demo.common.Result;
-import com.demo.common.model.Blog;
+import com.demo.common.model.Blog1;
 import com.demo.common.model.User;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class UserController extends Controller {
     public void index() {
-        setAttr("userPage", Blog.me.paginate(getParaToInt(0, 1), 10));
+        setAttr("userPage", Blog1.me.paginate(getParaToInt(0, 1), 10));
 //        render("user.html");
     }
 

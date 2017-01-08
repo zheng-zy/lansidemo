@@ -1,13 +1,13 @@
 package com.demo.blog;
 
-import com.demo.common.model.Blog;
+import com.demo.common.model.Blog1;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
 /**
- * BlogValidator.
+ * BlogValidator1.
  */
-public class BlogValidator extends Validator {
+public class BlogValidator1 extends Validator {
 
     protected void validate(Controller controller) {
         validateRequiredString("blog.title", "titleMsg", "请输入Blog标题!");
@@ -15,7 +15,7 @@ public class BlogValidator extends Validator {
     }
 
     protected void handleError(Controller controller) {
-        controller.keepModel(Blog.class);
+        controller.keepModel(Blog1.class);
 
         String actionKey = getActionKey();
         if (actionKey.equals("/blog/save"))

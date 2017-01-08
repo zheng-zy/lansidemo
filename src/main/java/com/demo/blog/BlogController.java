@@ -1,44 +1,31 @@
 package com.demo.blog;
 
 import com.demo.common.model.Blog;
-import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.plugin.activerecord.Page;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * BlogController
- * 所有 sql 与业务逻辑写在 Model 或 Service 中，不要写在 Controller 中，养成好习惯，有利于大型项目的开发与维护
+ * <p></p>
+ * Created by zhezhiyong@163.com on 2017/1/8.
  */
-@Before(BlogInterceptor.class)
 public class BlogController extends Controller {
 
     public void index() {
-        setAttr("blogPage", Blog.me.paginate(getParaToInt(0, 1), 10));
-        render("blog.html");
+
     }
 
-    public void add() {
+
+    public void list() {
+        int page = getParaToInt("page", 1);
+        int rows = getParaToInt("rows", 10);
+        Page<Blog> userPage = Blog.dao.paginate(page, rows);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("rows", userPage.getList());
+        map.put("total", userPage.getTotalRow());
+        renderJson(map);
     }
 
-    @Before(BlogValidator.class)
-    public void save() {
-        getModel(Blog.class).save();
-        redirect("/blog");
-    }
-
-    public void edit() {
-        setAttr("blog", Blog.me.findById(getParaToInt()));
-    }
-
-    @Before(BlogValidator.class)
-    public void update() {
-        getModel(Blog.class).update();
-        redirect("/blog");
-    }
-
-    public void delete() {
-        Blog.me.deleteById(getParaToInt());
-        redirect("/blog");
-    }
 }
-
-

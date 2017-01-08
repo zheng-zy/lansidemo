@@ -17,10 +17,12 @@ public class _MappingKit {
 
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("blog", "id", Blog.class);
-		arp.addMapping("tbl_permission", "id", Permission.class);
-		arp.addMapping("tbl_role", "id", Role.class);
+        arp.addMapping("tbl_blog", "id", Blog.class);
+        arp.addMapping("tbl_permission", "id", Permission.class);
+        arp.addMapping("tbl_role", "id", Role.class);
 		arp.addMapping("tbl_role_permission", "id", RolePermission.class);
-		arp.addMapping("tbl_user", "id", User.class);
-	}
+        arp.addMapping("tbl_tag", "id", Tag.class);
+        arp.addMapping("tbl_user", "id", User.class);
+    }
 }
 
