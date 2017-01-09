@@ -14,7 +14,7 @@ import java.util.Map;
 public class BlogController extends Controller {
 
     public void index() {
-
+        render("add_md.html");
     }
 
 
