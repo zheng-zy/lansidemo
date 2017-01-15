@@ -60,15 +60,10 @@ body {
     text-align: left;
 }
 
-#layout > header, .btns {
+#layout > header, .btns, .titles {
     padding: 15px 0;
     width: 90%;
     margin: 0 auto;
-}
-
-.titles {
-    padding-left: 30%;
-    width: 90%;
 }
 
 .title {
