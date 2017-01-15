@@ -1,9 +1,11 @@
 package com.demo.blog;
 
+import com.demo.common.Result;
 import com.demo.common.model.Blog;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,5 +29,23 @@ public class BlogController extends Controller {
         map.put("total", userPage.getTotalRow());
         renderJson(map);
     }
+
+    public void save() {
+        String title = getPara("title", "");
+        String mdContent = getPara("md_content", "");
+        String htmlContent = getPara("html_content", "");
+        System.out.println("title = " + title);
+        Blog blog = new Blog();
+        blog.setTitle(title);
+        blog.setContent(mdContent);
+        blog.setUpdateTime(new Date());
+        blog.save();
+        renderJson(Result.SUCCESS);
+    }
+
+    public void detail() {
+        render("blog_md.html");
+    }
+
 
 }
