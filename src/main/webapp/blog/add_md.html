@@ -85,7 +85,7 @@
             $.post('/blog/save', {title: title, md_content: md_content, html_content: html_content}, function (result) {
                 if (result.success) {
                     alert("success");
-                    location.href = '/';
+                    location.href = '/blog';
                 } else {
                     alert("error");
 //                    $.messager.show({	// show error message

@@ -2,7 +2,9 @@ package com.demo.blog;
 
 import com.demo.common.Result;
 import com.demo.common.model.Blog;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
+import com.jfinal.ext.interceptor.GET;
 import com.jfinal.plugin.activerecord.Page;
 
 import java.util.Date;
@@ -43,7 +45,14 @@ public class BlogController extends Controller {
         renderJson(Result.SUCCESS);
     }
 
+    @Before(GET.class)
     public void detail() {
+        int id = getParaToInt("id", 0);
+        Blog blog = Blog.dao.findById(id);
+        renderJson(new Result(200, true, "", blog));
+    }
+
+    public void view() {
         render("blog_md.html");
     }
 
