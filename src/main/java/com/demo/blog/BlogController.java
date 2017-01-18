@@ -18,7 +18,13 @@ import java.util.Map;
 public class BlogController extends Controller {
 
     public void index() {
-        render("add_md.html");
+        int id = getParaToInt("id", 0);
+        System.out.println("id: " + id);
+        if (0 == id) {
+            render("add_md.html");
+        } else {
+            render("edit_md.html");
+        }
     }
 
 
@@ -36,12 +42,22 @@ public class BlogController extends Controller {
         String title = getPara("title", "");
         String mdContent = getPara("md_content", "");
         String htmlContent = getPara("html_content", "");
-        System.out.println("title = " + title);
         Blog blog = new Blog();
         blog.setTitle(title);
         blog.setContent(mdContent);
         blog.setUpdateTime(new Date());
         blog.save();
+        renderJson(Result.SUCCESS);
+    }
+
+    public void update() {
+        int id = getParaToInt("id");
+//        String title = getPara("title", "");
+        String mdContent = getPara("md_content", "");
+        Blog blog = Blog.dao.findById(id);
+        blog.setContent(mdContent);
+        blog.setUpdateTime(new Date());
+        blog.update();
         renderJson(Result.SUCCESS);
     }
 

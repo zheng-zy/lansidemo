@@ -21,10 +21,10 @@
                 columns: [[
                     {field: 'id', title: 'Id'},
                     {field: 'title', title: 'Title'},
-                    {field: 'content', title: 'Content', align: 'right'},
                     {field: 'create_time', title: 'Create Time'},
                     {field: 'update_time', title: 'Update Time'},
-                    {field: 'desc', title: 'Desc'}
+                    {field: 'desc', title: 'Desc'},
+                    {field: 'content', title: 'Content', align: 'right'}
                 ]]
             });
             show_dlg = $('#dlg').show().dialog({
@@ -45,7 +45,13 @@
         });
 
         function add() {
-
+            location.href = '/blog';
+        }
+        function edit() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                location.href = '/blog?id=' + row.id;
+            }
         }
 
         function operation(value, row, index) {

@@ -18,7 +18,7 @@
         <button id="save-blog-btn">Save Bolg</button>
     </div>
     <div class="titles">
-        <input class="title" id="title" type="text" name="title" placeholder="无标题博客" value="" maxlength="100">
+        <input class="title" id="title" type="text" name="title" placeholder="无标题博客" value="标题" maxlength="100">
     </div>
     <div id="test-editormd">
                 <textarea style="display:none;">[TOC]
@@ -85,7 +85,7 @@
             $.post('/blog/save', {title: title, md_content: md_content, html_content: html_content}, function (result) {
                 if (result.success) {
                     alert("success");
-                    location.href = '/blog';
+                    location.href = '/blog/list.html';
                 } else {
                     alert("error");
 //                    $.messager.show({	// show error message
