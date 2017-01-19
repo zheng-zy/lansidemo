@@ -1,8 +1,8 @@
 package com.demo.user;
 
-import com.demo.common.Result;
 import com.demo.common.model.Blog1;
 import com.demo.common.model.User;
+import com.demo.common.page.Result;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;

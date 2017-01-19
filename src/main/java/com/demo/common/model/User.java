@@ -1,7 +1,7 @@
 package com.demo.common.model;
 
-import com.demo.common.Result;
 import com.demo.common.model.base.BaseUser;
+import com.demo.common.page.Result;
 import com.jfinal.plugin.activerecord.Page;
 
 import java.util.List;

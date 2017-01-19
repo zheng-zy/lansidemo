@@ -1,8 +1,8 @@
 package com.demo.permission;
 
-import com.demo.common.Result;
 import com.demo.common.model.Permission;
 import com.demo.common.model.RolePermission;
+import com.demo.common.page.Result;
 import com.demo.common.page.Tree;
 import com.demo.common.util.TreeUtils;
 import com.jfinal.aop.Before;

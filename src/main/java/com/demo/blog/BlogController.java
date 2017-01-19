@@ -1,7 +1,7 @@
 package com.demo.blog;
 
-import com.demo.common.Result;
 import com.demo.common.model.Blog;
+import com.demo.common.page.Result;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.ext.interceptor.GET;
@@ -10,6 +10,8 @@ import com.jfinal.plugin.activerecord.Page;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.demo.common.constant.NOT_FIND;
 
 /**
  * <p></p>
@@ -59,6 +61,17 @@ public class BlogController extends Controller {
         blog.setUpdateTime(new Date());
         blog.update();
         renderJson(Result.SUCCESS);
+    }
+
+    public void delete() {
+        int id = getParaToInt("id");
+        Blog blog = Blog.dao.findById(id);
+        if (null == blog) {
+            renderJson(new Result(400, false, NOT_FIND, null));
+        } else {
+            blog.delete();
+            renderJson(Result.SUCCESS);
+        }
     }
 
     @Before(GET.class)

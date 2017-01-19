@@ -11,7 +11,7 @@
         var show_dlg;
         $(function () {
             $('#dg').datagrid({
-                fitColumns: true,
+                fitColumns: false,
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -24,7 +24,7 @@
                     {field: 'create_time', title: 'Create Time'},
                     {field: 'update_time', title: 'Update Time'},
                     {field: 'desc', title: 'Desc'},
-                    {field: 'content', title: 'Content', align: 'right'}
+                    {field: 'content', title: 'Content', align: 'left'}
                 ]]
             });
             show_dlg = $('#dlg').show().dialog({
@@ -51,6 +51,27 @@
             var row = $('#dg').datagrid('getSelected');
             if (row) {
                 location.href = '/blog?id=' + row.id;
+            }
+        }
+
+        function del() {
+            var row = $('#dg').datagrid('getSelected');
+            if (row) {
+                $.get('/blog/delete?id=' + row.id, function (result) {
+                    if (result.success) {
+                        show_dlg.dialog('close');
+                        $.messager.show({	// show error message
+                            title: 'Success',
+                            msg: '删除成功'
+                        });
+                        $('#dg').datagrid('reload');
+                    } else {
+                        $.messager.show({	// show error message
+                            title: 'Error',
+                            msg: result.msg
+                        });
+                    }
+                });
             }
         }
 

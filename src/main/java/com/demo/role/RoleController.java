@@ -1,7 +1,7 @@
 package com.demo.role;
 
-import com.demo.common.Result;
 import com.demo.common.model.Role;
+import com.demo.common.page.Result;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
