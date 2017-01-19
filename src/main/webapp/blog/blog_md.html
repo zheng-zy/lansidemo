@@ -57,9 +57,10 @@
         <p>HTML Preview (markdown to html and custom ToC container)</p>
     </header>
     <div class="btns">
-        <button onclick="location.href='./html-preview-markdown-to-html.html';">前一篇</button>
-        <button onclick="location.href='./html-preview-markdown-to-html.html';">后一篇</button>
-        <button onclick="location.href='./html-preview-markdown-to-html.html';">返回 Back</button>
+        <button id="before-article">前一篇</button>
+        <button id="after-article">后一篇</button>
+        <button id="go_back">返回</button>
+        <button id="go_home">主页</button>
     </div>
     <div id="sidebar">
         <h1>Table of Contents</h1>
@@ -112,6 +113,18 @@
             // 获取Markdown源码
 //            console.log(testEditormdView.getMarkdown());
 
+        });
+        $("#before-article").bind('click', function () {
+            location.href = '/blog/detail' + search + '&action=1';
+        });
+        $("#after-article").bind('click', function () {
+            location.href = '/blog/detail' + search + '&action=-1';
+        });
+        $("#go_back").bind('click', function () {
+            history.go(-1);
+        });
+        $("#go_home").bind('click', function () {
+            location.href = '/blog/index_blog'
         });
     });
 </script>

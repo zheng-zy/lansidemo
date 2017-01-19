@@ -14,6 +14,11 @@ import java.util.Map;
  */
 public class AppTest {
     public static void main(String[] args) {
+        String action = "";
+        switch (action){
+
+        }
+
         System.out.println("System.getProperty(\"user.dir\") = " + System.getProperty("user.dir"));
         System.out.println("System.getProperty(\"java.io.tmpdir\") = " + System.getProperty("java.io.tmpdir") + File.separatorChar + "1.png");
         System.out.println("System.getProperty(\"java.io.tmpdir\") = " + System.getProperty("java.io.tmpdir") + File.separator + "1.png");

@@ -11,13 +11,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.demo.common.constant.NOT_FIND;
+import static com.demo.common.constant.*;
 
 /**
  * <p></p>
  * Created by zhezhiyong@163.com on 2017/1/8.
  */
 public class BlogController extends Controller {
+
+    public void index_blog() {
+        setAttr("blogPage", Blog.dao.paginate(getParaToInt(0, 1), 10));
+        render("index.html");
+    }
+
 
     public void index() {
         int id = getParaToInt("id", 0);
@@ -76,9 +82,30 @@ public class BlogController extends Controller {
 
     @Before(GET.class)
     public void detail() {
-        int id = getParaToInt("id", 0);
-        Blog blog = Blog.dao.findById(id);
-        renderJson(new Result(200, true, "", blog));
+        int id = getParaToInt(ID, 0);
+        int action = getParaToInt(ACTION, 0);
+        switch (action) {
+            case 1:
+                Blog blog1 = Blog.dao.findFirst("select id from tbl_blog where id < ? order by id desc limit 1", id);
+                if (null == blog1) {
+                    redirect("/blog/view?id=" + id);
+                } else {
+                    redirect("/blog/view?id=" + blog1.getId());
+                }
+                break;
+            case -1:
+                Blog blog2 = Blog.dao.findFirst("select id from tbl_blog where id > ? order by id asc limit 1", id);
+                if (null == blog2) {
+                    redirect("/blog/view?id=" + id);
+                } else {
+                    redirect("/blog/view?id=" + blog2.getId());
+                }
+                break;
+            default:
+                Blog blog = Blog.dao.findById(id);
+                renderJson(new Result(200, true, "", blog));
+                break;
+        }
     }
 
     public void view() {
